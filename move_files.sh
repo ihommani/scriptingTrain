@@ -10,7 +10,7 @@ Welcome to the move files utility.
 EOF
 
 function usage {
-    echo -n '
+    printf  '
 DESCRIPTION
     This little utility allow you to move all files
     with a specific extension to a specific directory.
@@ -51,15 +51,16 @@ ext_flag=${ext_flag:? "extension is mandatory. Exiting."}
 
 if  [ ! -d "$destination_directory" ]
     then
-        echo "$destination_directory is not a valid path. Exiting."
+        printf "%s is not a valid path. Exiting." $destination_directory
         exit 1
 fi
 
 files_to_move=$(ls *.$extension_file)
 
-echo "Moving *.$extension_file files to the directory $destination_directory."
+printf "Moving *.%s files to the directory %s." $extension_file $destination_directory
 for file in $files_to_move;
     do
+        printf "\nMoving  %s\t" $file
         mv $file $destination_directory
     done;
 
