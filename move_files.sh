@@ -46,19 +46,19 @@ done
 
 
 # Basic verification
-if [[ -z "$dir_flag" ]]
+if [ -z "$dir_flag" ]
     then
         echo "Target directory is mandatory. Exiting"
         exit 1
 fi
 
-if [[ -z "$ext_flag" ]]
+if [ -z "$ext_flag" ]
     then
         echo "extension is mandatory. Exiting"
         exit 1
 fi
 
-if  [[ ! -d "$destination_directory" ]]
+if  [ ! -d "$destination_directory" ]
     then
         echo "$destination_directory is not a valid path. Exiting."
         exit 1
