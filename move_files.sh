@@ -29,7 +29,7 @@ EXAMPLE
 dir_flag=
 ext_flag=
 
-options="e:d:h"
+options=":e:d:h"
 #Process the arguments
 while getopts $options opt
 do
@@ -40,7 +40,10 @@ do
             destination_directory=$OPTARG;;
         h)  usage
             exit;;
-        \?) usage;;
+        \?) printf "\n\t%s: invalid option -%s\n" $0 $OPTARG >&2
+            usage >&2
+            exit 1
+            ;;
     esac
 done
 
