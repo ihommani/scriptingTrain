@@ -84,7 +84,7 @@ do
         error "Unreconized option: $1"
         ;;
     *)
-        break
+        break # We break the while loop, since there is no more option to parse
         ;;
     esac
     shift # Allow to downgrade the option number. $n becomes $n-1 and $1 is thrown away
