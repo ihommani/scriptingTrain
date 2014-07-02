@@ -121,7 +121,6 @@ do
     do
         for file in $dir/$pattern
         do
-            echo $file
             if [ -f "$file" ]
             then
                 result="$file"
