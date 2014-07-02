@@ -8,7 +8,7 @@
 # The exit code is 0 if all files are found, and otherwise a nonzero value equal to the number of files not found
 #
 # Usage: 
-# pathfind [--all] [--?] [--help] [--version] envvar pattern(s)
+# pathfind [--all] [--?] [--help] [--version][--quiet] envvar pattern(s)
 # with the --all pption, every directory in the path is searched, instad of sropping with the first one found
 
 
@@ -58,6 +58,7 @@ warning()
 
 
 all=yes # I think that string in this case make things clearer
+quiet=no
 envvar=
 EXITCODE=0
 PROGRAM=$(basename $0)
@@ -80,6 +81,9 @@ do
     --version | --versio | --versi | --vers | --ver | --ve | --v | -version | -versio | -versi | -vers | -v )
         version
         ;;
+    --quiet | -quiet | --q | -q)
+        quiet=yes
+        ;;
     -*)
         error "Unreconized option: $1"
         ;;
@@ -98,6 +102,8 @@ test $# -gt 0 && shift # We throw away $1 and replace it with $2 i.e the search 
 test "x$envvar" = "xPATH" && envvar=OLDPATH # In case the envvar is actually the user PATH we just override at the beginning
 
 dirpath=$(eval echo '${'"$envvar"'}' 2>/dev/null | tr : ' ') # tricky part
+
+test $quiet = "yes" && exec > /dev/null 2>&1 # We redirect standard and error output to /dev/null if quiet option is enabled
 
 if [ -z "$envvar" ]
 then
